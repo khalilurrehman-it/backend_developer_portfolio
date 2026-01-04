@@ -2,56 +2,56 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "Multi-Tenant SaaS Backend",
-    context: "B2B SaaS Platform",
-    problem:
-      "The platform required strict tenant isolation, role-based access control, and predictable performance as usage scaled across multiple organizations.",
-    architecture: [
-      "Laravel-based service layer with domain separation",
-      "JWT authentication with role & permission enforcement",
-      "Tenant-aware database design",
-      "Caching for high-read endpoints",
-    ],
-    outcome:
-      "Delivered a secure and scalable backend capable of supporting multiple tenants with consistent performance under increasing load.",
+    title: "Sportskins",
+    description:
+      "A sports engagement platform focused on football-based prediction games and fan interaction experiences.",
+    link: "https://sportskins.uk/",
     accent: "emerald",
   },
   {
-    title: "E-Commerce Order & Payment System",
-    context: "High-traffic Commerce Platform",
-    problem:
-      "Handling concurrent orders, payment consistency, and inventory accuracy while ensuring fault tolerance during peak traffic.",
-    architecture: [
-      "Service-oriented order processing",
-      "Database transactions for consistency",
-      "Asynchronous jobs for payment and notifications",
-      "Failure-safe retry mechanisms",
-    ],
-    outcome:
-      "Reduced order failures and improved system reliability during high traffic periods.",
+    title: "Fanzine",
+    description:
+      "A sports media and content aggregation website covering global leagues, news, and fan-driven content.",
+    link: "http://fanzine.com/",
     accent: "cyan",
   },
   {
-    title: "Microservices-Based API Platform",
-    context: "Public API Infrastructure",
-    problem:
-      "Monolithic architecture limited scalability and slowed down feature delivery across teams.",
-    architecture: [
-      "Service decomposition based on business domains",
-      "API Gateway for request routing and security",
-      "Stateless services for horizontal scaling",
-      "Centralized logging and monitoring",
-    ],
-    outcome:
-      "Enabled independent scaling of services and faster development cycles across teams.",
+    title: "Human Focus",
+    description:
+      "A UK-based e-learning platform delivering health, safety, and compliance training for professionals.",
+    link: "https://humanfocus.co.uk/",
+    accent: "emerald",
+  },
+  {
+    title: "IntSourceVertise",
+    description:
+      "A digital services and marketing platform supporting brands with online growth solutions.",
+    link: "https://intsourcevertise.com/",
+    accent: "cyan",
+  },
+  {
+    title: "AgileMTech",
+    description:
+      "A UAE-focused technology solutions company offering development and digital transformation services.",
+    link: "https://www.agilemtech.ae/",
     accent: "emerald",
   },
 ];
 
 export default function HomeProjectsSection() {
+  const scrollToContact = () => {
+    const target = document.querySelector("#contact");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <section id="projects" className="relative bg-neutral-950 py-24 overflow-hidden">
-      {/* Ambient background */}
+    <section
+      id="projects"
+      className="relative bg-neutral-950 py-24 overflow-hidden"
+    >
+      {/* Background glow */}
       <div className="absolute -top-32 left-1/4 size-[360px] bg-emerald-500/10 blur-[120px]" />
       <div className="absolute -bottom-32 right-1/4 size-[360px] bg-cyan-500/10 blur-[120px]" />
 
@@ -61,7 +61,7 @@ export default function HomeProjectsSection() {
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
           <span className="text-xs tracking-[0.25em] uppercase text-neutral-500">
@@ -69,36 +69,41 @@ export default function HomeProjectsSection() {
           </span>
 
           <h2 className="mt-3 text-3xl md:text-4xl font-semibold text-neutral-100">
-            Backend Systems
+            Live Projects
             <span
               className="block text-transparent bg-clip-text 
-            bg-gradient-to-r from-emerald-400 to-cyan-400"
+              bg-gradient-to-r from-emerald-400 to-cyan-400"
             >
-              Designed & Delivered
+              Delivered for Clients
             </span>
           </h2>
 
           <p className="mt-4 text-neutral-400 leading-relaxed">
-            A selection of backend projects where architecture, scalability, and
-            long-term maintainability were core requirements.
+            A selection of production-ready applications and platforms where
+            backend reliability, performance, and scalability were key.
           </p>
         </motion.div>
 
-        {/* Projects */}
-        <div className="mt-14 space-y-10">
+        {/* Cards Grid */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Project Cards */}
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
               key={index}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.6 }}
-              className="relative rounded-r-2xl border border-neutral-800 
-              bg-neutral-900/60 backdrop-blur-md p-6 md:p-8"
+              transition={{ delay: index * 0.06, duration: 0.5 }}
+              className="group relative rounded-b-2xl border border-neutral-800 
+              bg-neutral-900/60 backdrop-blur-md p-6 hover:-translate-y-1
+              hover:shadow-xl transition"
             >
               {/* Accent bar */}
               <span
-                className={`absolute left-0 top-0 h-full w-[3px] rounded-l-2xl 
+                className={`absolute top-0 left-0 h-[4px] w-full rounded-t-2xl
                 ${
                   project.accent === "emerald"
                     ? "bg-emerald-400"
@@ -106,54 +111,45 @@ export default function HomeProjectsSection() {
                 }`}
               />
 
-              <div className="pl-4">
-                {/* Title */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="text-xl font-medium text-neutral-100">
-                    {project.title}
-                  </h3>
-                  <span
-                    className="text-xs px-3 py-1 rounded-full 
-                  bg-neutral-800 text-neutral-400"
-                  >
-                    {project.context}
-                  </span>
-                </div>
+              <h3 className="mt-3 text-lg font-medium text-neutral-100">
+                {project.title}
+              </h3>
 
-                {/* Problem */}
-                <div className="mt-4">
-                  <h4 className="text-sm font-medium text-neutral-300">
-                    Problem
-                  </h4>
-                  <p className="mt-1 text-sm text-neutral-400 leading-relaxed">
-                    {project.problem}
-                  </p>
-                </div>
+              <p className="mt-3 text-sm text-neutral-400 leading-relaxed">
+                {project.description}
+              </p>
 
-                {/* Architecture */}
-                <div className="mt-4">
-                  <h4 className="text-sm font-medium text-neutral-300">
-                    Architecture & Decisions
-                  </h4>
-                  <ul className="mt-2 space-y-1 text-sm text-neutral-400 list-disc list-inside">
-                    {project.architecture.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Outcome */}
-                <div className="mt-4">
-                  <h4 className="text-sm font-medium text-neutral-300">
-                    Outcome
-                  </h4>
-                  <p className="mt-1 text-sm text-neutral-400 leading-relaxed">
-                    {project.outcome}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+              <span
+                className="mt-5 inline-block text-sm border-2 border-cyan-900 text-white transition bg-cyan-900 px-4 py-2 rounded-2xl group-hover:bg-transparent"
+              >
+                Visit Live Site →
+              </span>
+            </motion.a>
           ))}
+
+          {/* CTA Card */}
+          <motion.div
+            onClick={scrollToContact}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: projects.length * 0.06, duration: 0.5 }}
+            className="cursor-pointer relative rounded-2xl border border-dashed 
+            border-emerald-400/40 bg-neutral-900/40 backdrop-blur-md p-6 
+            flex flex-col justify-center hover:-translate-y-1 hover:shadow-xl 
+            transition group"
+          >
+            <h3 className="text-lg font-medium text-neutral-100">
+              Want a Similar Project?
+            </h3>
+
+            <p className="mt-3 text-sm text-neutral-400 leading-relaxed">
+              Let’s discuss your backend requirements and build a scalable,
+              production-ready system tailored to your needs.
+            </p>
+
+            <span className="mt-5 inline-block text-sm text-center border-2 border-emerald-900 text-white transition bg-emerald-900 px-4 py-2 rounded-2xl group-hover:bg-transparent">Contact Me →</span>
+          </motion.div>
         </div>
       </div>
     </section>
